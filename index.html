@@ -7,214 +7,203 @@
 
 <style>
 
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ===== GLOBAL ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background: radial-gradient(circle at top, #1a002b, #000);
-    height: 100vh;
-    overflow: hidden;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
+body{
+    font-family: 'Georgia', serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+    color:#fff;
 }
 
-/* Stars */
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    animation: twinkle 2s infinite alternate;
+/* Soft floating light particles */
+.particle{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:rgba(255,255,255,0.6);
+    border-radius:50%;
+    animation:float 6s linear infinite;
 }
 
-@keyframes twinkle {
-    from { opacity: 0.2; }
-    to { opacity: 1; }
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:0;}
+    20%{opacity:1;}
+    100%{transform:translateY(-10vh);opacity:0;}
 }
 
-.container {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(15px);
-    padding: 40px 25px;
-    border-radius: 25px;
-    width: 100%;
-    max-width: 650px;
-    box-shadow: 0 0 50px rgba(255,0,150,0.5);
+/* ===== CARD ===== */
+.container{
+    position:relative;
+    width:90%;
+    max-width:420px;
+    padding:40px 25px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(20px);
+    box-shadow:0 0 40px rgba(255,215,0,0.3);
+    text-align:center;
 }
 
-h1 {
-    font-size: clamp(22px, 4vw, 30px);
-    color: #ff4da6;
-    margin-bottom: 20px;
+/* Golden heading */
+h1{
+    font-size:22px;
+    margin-bottom:20px;
+    color:#ffd700;
+    letter-spacing:1px;
 }
 
-#letter {
-    font-size: clamp(15px, 3vw, 18px);
-    line-height: 1.6;
-    min-height: 140px;
+/* Letter */
+#message{
+    font-size:15px;
+    line-height:1.7;
+    min-height:120px;
+    margin-bottom:20px;
+    color:#f5f5f5;
 }
 
 /* Buttons */
-.buttons {
-    margin-top: 25px;
-    position: relative;
+button{
+    padding:10px 22px;
+    font-size:14px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
 }
 
-button {
-    padding: 10px 25px;
-    font-size: 16px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    margin: 10px;
-    transition: 0.3s;
+.yes-btn{
+    background:linear-gradient(45deg,#ffd700,#ffb347);
+    color:#000;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(255,215,0,0.6);
 }
 
-.yes-btn {
-    background: #ff2e63;
-    color: white;
+.yes-btn:hover{
+    transform:scale(1.08);
 }
 
-.no-btn {
-    background: #444;
-    color: white;
-    position: absolute;
+.no-btn{
+    background:#333;
+    color:#fff;
+    position:absolute;
 }
 
-button:hover {
-    transform: scale(1.1);
+.final{
+    display:none;
+    margin-top:15px;
+    font-size:16px;
+    color:#ffd700;
+    animation:fadeIn 1.5s ease;
 }
 
-.final {
-    display: none;
-    font-size: clamp(18px, 4vw, 22px);
-    margin-top: 20px;
-    animation: fadeIn 2s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.7); }
-    to { opacity: 1; transform: scale(1); }
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
 }
 
 /* Floating Hearts */
-.heart {
-    position: fixed;
-    font-size: 22px;
-    animation: float 5s linear infinite;
+.heart{
+    position:fixed;
+    font-size:20px;
+    animation:rise 4s linear infinite;
 }
 
-@keyframes float {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
-}
-
-/* Mobile Optimization */
-@media (max-width: 480px) {
-    .container {
-        padding: 30px 15px;
-    }
-
-    button {
-        width: 100%;
-        margin: 8px 0;
-    }
-
-    .no-btn {
-        position: static;
-    }
+@keyframes rise{
+    0%{transform:translateY(0);opacity:1;}
+    100%{transform:translateY(-100vh);opacity:0;}
 }
 
 </style>
 </head>
 <body>
 
-<audio autoplay loop>
-    <source src="your-romantic-music.mp3" type="audio/mpeg">
-</audio>
-
 <div class="container">
-    <h1>To The Love Of My Life ❤️</h1>
-    <div id="letter"></div>
+    <h1>Will You Be My Valentine? 💍</h1>
+    <div id="message"></div>
 
-    <div class="buttons">
-        <button class="yes-btn" onclick="celebrate()">Yes 💍</button>
-        <button class="no-btn" id="noBtn">No 😢</button>
-    </div>
+    <button class="yes-btn" onclick="celebrate()">Yes ❤️</button>
+    <button class="no-btn" id="noBtn">No 😢</button>
 
     <div class="final" id="finalMessage">
-        💖 You Just Made My Life Complete 💖 <br><br>
+        ✨ You Just Made My Life Magical ✨ <br><br>
         "In every universe, in every lifetime,  
-        I would still find you and choose you." 🌹✨
+        I will still find you and choose you." ❤️
     </div>
 </div>
 
 <script>
 
-// Create Stars
-for (let i = 0; i < 120; i++) {
-    let star = document.createElement("div");
-    star.className = "star";
-    star.style.top = Math.random() * 100 + "vh";
-    star.style.left = Math.random() * 100 + "vw";
-    star.style.animationDuration = (Math.random() * 2 + 1) + "s";
-    document.body.appendChild(star);
-}
+/* TYPEWRITER */
+const text="I never knew love could feel this peaceful… \
+Until you became my reason to smile every day. \
+You are my calm in chaos, my light in darkness. \
+When I look at you, I see my forever. \
+\n\nWill you walk this life with me? ❤️";
 
-// Emotional Letter
-const message = "I never believed in destiny... until you walked into my life. \
-You didn’t just change my days — you changed my world. \
-You are my calm in every storm, my light in every darkness. \
-When I look at you, I see my future. \
-When I hold you, I feel home. \
-I don’t promise a perfect life... but I promise to love you perfectly, every single day. 💖 \
-\n\nWill you be my Valentine... and my forever? 💍❤️";
-
-let index = 0;
-function typeEffect() {
-    if (index < message.length) {
-        document.getElementById("letter").innerHTML += message.charAt(index);
-        index++;
-        setTimeout(typeEffect, 35);
+let i=0;
+function type(){
+    if(i<text.length){
+        document.getElementById("message").innerHTML+=text.charAt(i);
+        i++;
+        setTimeout(type,35);
     }
 }
-typeEffect();
+type();
 
-// Moving No Button (disabled on small screens)
-const noBtn = document.getElementById("noBtn");
-if (window.innerWidth > 480) {
-    noBtn.addEventListener("mouseover", () => {
-        noBtn.style.top = Math.random() * 300 + "px";
-        noBtn.style.left = Math.random() * 300 + "px";
-    });
+/* Move No Button */
+const noBtn=document.getElementById("noBtn");
+const container=document.querySelector(".container");
+
+function moveButton(){
+    const rect=container.getBoundingClientRect();
+    const maxX=rect.width-noBtn.offsetWidth-20;
+    const maxY=rect.height-noBtn.offsetHeight-20;
+
+    noBtn.style.left=Math.random()*maxX+"px";
+    noBtn.style.top=Math.random()*maxY+"px";
 }
 
-// Celebrate
-function celebrate() {
-    document.getElementById("finalMessage").style.display = "block";
+noBtn.addEventListener("mouseenter",moveButton);
+noBtn.addEventListener("touchstart",function(e){
+    e.preventDefault();
+    moveButton();
+});
 
-    setInterval(() => {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.bottom = "0";
+/* Celebrate */
+function celebrate(){
+    document.getElementById("finalMessage").style.display="block";
+
+    setInterval(()=>{
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.bottom="0";
         document.body.appendChild(heart);
-
-        setTimeout(() => {
-            heart.remove();
-        }, 5000);
-    }, 300);
+        setTimeout(()=>heart.remove(),4000);
+    },300);
 }
+
+/* Background particles */
+for(let p=0;p<40;p++){
+    let particle=document.createElement("div");
+    particle.className="particle";
+    particle.style.left=Math.random()*100+"vw";
+    particle.style.animationDuration=(Math.random()*4+4)+"s";
+    document.body.appendChild(particle);
+}
+
 </script>
 
 </body>
