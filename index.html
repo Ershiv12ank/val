@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Forever ❤️</title>
+
+<style>
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #1a002b, #000);
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Stars */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+}
+
+.container {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    padding: 40px 25px;
+    border-radius: 25px;
+    width: 100%;
+    max-width: 650px;
+    box-shadow: 0 0 50px rgba(255,0,150,0.5);
+}
+
+h1 {
+    font-size: clamp(22px, 4vw, 30px);
+    color: #ff4da6;
+    margin-bottom: 20px;
+}
+
+#letter {
+    font-size: clamp(15px, 3vw, 18px);
+    line-height: 1.6;
+    min-height: 140px;
+}
+
+/* Buttons */
+.buttons {
+    margin-top: 25px;
+    position: relative;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.yes-btn {
+    background: #ff2e63;
+    color: white;
+}
+
+.no-btn {
+    background: #444;
+    color: white;
+    position: absolute;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.final {
+    display: none;
+    font-size: clamp(18px, 4vw, 22px);
+    margin-top: 20px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    font-size: 22px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Mobile Optimization */
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 15px;
+    }
+
+    button {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    .no-btn {
+        position: static;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<audio autoplay loop>
+    <source src="your-romantic-music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <h1>To The Love Of My Life ❤️</h1>
+    <div id="letter"></div>
+
+    <div class="buttons">
+        <button class="yes-btn" onclick="celebrate()">Yes 💍</button>
+        <button class="no-btn" id="noBtn">No 😢</button>
+    </div>
+
+    <div class="final" id="finalMessage">
+        💖 You Just Made My Life Complete 💖 <br><br>
+        "In every universe, in every lifetime,  
+        I would still find you and choose you." 🌹✨
+    </div>
+</div>
+
+<script>
+
+// Create Stars
+for (let i = 0; i < 120; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.animationDuration = (Math.random() * 2 + 1) + "s";
+    document.body.appendChild(star);
+}
+
+// Emotional Letter
+const message = "I never believed in destiny... until you walked into my life. \
+You didn’t just change my days — you changed my world. \
+You are my calm in every storm, my light in every darkness. \
+When I look at you, I see my future. \
+When I hold you, I feel home. \
+I don’t promise a perfect life... but I promise to love you perfectly, every single day. 💖 \
+\n\nWill you be my Valentine... and my forever? 💍❤️";
+
+let index = 0;
+function typeEffect() {
+    if (index < message.length) {
+        document.getElementById("letter").innerHTML += message.charAt(index);
+        index++;
+        setTimeout(typeEffect, 35);
+    }
+}
+typeEffect();
+
+// Moving No Button (disabled on small screens)
+const noBtn = document.getElementById("noBtn");
+if (window.innerWidth > 480) {
+    noBtn.addEventListener("mouseover", () => {
+        noBtn.style.top = Math.random() * 300 + "px";
+        noBtn.style.left = Math.random() * 300 + "px";
+    });
+}
+
+// Celebrate
+function celebrate() {
+    document.getElementById("finalMessage").style.display = "block";
+
+    setInterval(() => {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "0";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }, 300);
+}
+</script>
+
+</body>
+</html>
